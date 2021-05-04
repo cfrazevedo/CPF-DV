@@ -1,0 +1,45 @@
+nc = str(input('Digite os 9 primeiros números do seu CPF: '))
+while True:
+    if len(nc) == 9 and nc.isnumeric() == True:
+        break
+    else:
+        if not nc.isnumeric():
+            print('Somente números podem ser digitados')
+        elif len(nc) != 9:
+            print('Você não digitou 9 números')
+        nc = int(input('Digite os 9 primeiros números do seu CPF: '))
+x = 10
+y = 0
+for c in nc:
+    y += x * int(c)
+    x -= 1
+z = y % 11
+if z == 0 or z == 1:
+    n10 = 0
+else:
+    n10 = 11 - z
+print(f'\nO primeiro dígito de verificação do seu CPF é {n10}')
+n10 = str(n10)
+nc = nc + n10
+x = y = 0
+for c in nc:
+    y += x * int(c)
+    if x == 0:
+         x = 10
+    else:
+        x -= 1
+z = y % 11
+if z == 0 or z == 1:
+    n11 = 0
+else:
+    n11 = 11 - z
+print(f'\nO segundo dígito de verificação do seu CPF é {n11}')
+n11 = str(n11)
+nc = nc + n11
+print(f'\nO seu CPF é ', end='')
+for c, d in enumerate(nc):
+    print(d, end='')
+    if c == 2 or c ==5:
+        print('.', end='')
+    elif c == 8:
+        print('-', end='')
